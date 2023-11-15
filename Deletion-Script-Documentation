@@ -1,0 +1,25 @@
+Line 1:  This line enables the uses of common parameters and other advanced script features 
+Line 2: starts the parameter section
+Line 3:  This line states that the target directory parameter is mandatory and must be provided when running the script, if not provided the script will ask for one.
+Line 4:  This line specifies that the parameter must have a valid path.  Test path verifies the path exists and is a container which holds other items.
+Line 5: Specifies the target directory path should be treated as a string
+Line 6:  Blank
+Line7: Specifies the days parameter is optional when running the script
+Line 8:  Sets the default value of days to 45 if no other parameter is specified when running the script.
+Line 9: Ends the parameters  section
+Line 10:  Blank
+Line 11: This command finds all the child items in the directory and subdirectories; it then pipes the output to object command which filters the files on the last day it was opened.  This is determined by subtracting the days from the last opening date showing the files that haven’t been opened in 45 days + this output is then stored in the files variable. 
+Line 12:  Blank
+Line 13:  This begins a loops  for each file that is saved in the files variable.  Starts overall loop.
+Line 14: Shows the file size rounded to the nearest whole.
+Line 15: Shows the last day opened.
+Line 16:  Asks if you want to delete the file, yes or no. 
+Line 17: Blank
+Line 18 Another loop if the answer to the line 9 question is Y it starts the loop.
+Line 19: Deletes the file.
+Line 20: Deletes the file and displays its size and last opened date.
+Line 21: Ends the loop if file is deleted.
+Line 22: if the file is not deleted or skipped it begins this else loop end. 
+Line 23: Says the file skipped and displays size and last opened date.
+Line 24:  Ends the else Loop.
+Line 25: Ends the entire loop section.
