@@ -1,0 +1,25 @@
+[CmdletBinding()]
+param (
+    [Parameter(Mandatory=$true)]
+    [ValidateScript({Test-Path $_ -PathType 'Container'})]
+    [string]$TargetDirectory,
+
+    [Parameter()]
+    [int]$Days = 45
+)
+
+$Files = Get-ChildItem -Path $TargetDirectory -Recurse | Where-Object {$_.LastAccessTime -lt (Get-Date).AddDays(-$Days)}
+
+foreach ($File in $Files) {
+    $FileSizeMB = [math]::Round($File.Length / 1MB, 2)
+    $LastAccessDate = [string]::Format("{0:MM/dd/yyyy}", $File.LastAccessTime)
+    $Confirmation = Read-Host "Do you want to delete $($File.FullName)? (Y/N)"
+
+    if ($Confirmation -eq "Y") {
+        Remove-Item $File.FullName
+        Write-Host "Deleted $($File.FullName) - size: $($FileSizeMB) MB, last accessed on: $($LastAccessDate)"
+    }
+    else {
+        Write-Host "Skipped $($File.FullName) - size: $($FileSizeMB) MB, last accessed on: $($LastAccessDate)"
+    }
+}
